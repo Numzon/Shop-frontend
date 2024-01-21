@@ -1,5 +1,5 @@
 import { IconButton, useTheme } from "@mui/material";
-import { useModeContext } from "../../../theme/PaletteModeContext";
+import { useModeContext } from "../../theme/PaletteModeContext";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 

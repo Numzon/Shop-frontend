@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTypes } from "../../requests/specificationPattern";
+import { getTypes } from "../..";
 
 export const useGetSimpleTypes = () =>
   useQuery({

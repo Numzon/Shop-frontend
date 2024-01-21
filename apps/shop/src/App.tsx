@@ -6,19 +6,22 @@ import AuthContextProvider from "./auth/AuthContext";
 import PaletteModeContextProvider from "./theme/PaletteModeContext";
 import ThemeProvider from "./theme";
 import "./lib/i18n";
+import CartContextProvider from "./context/CartContext";
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageContextProvider>
         <AuthContextProvider>
-          <BrowserRouter>
-            <PaletteModeContextProvider>
-              <ThemeProvider>
-                <AppRoutes />
-              </ThemeProvider>
-            </PaletteModeContextProvider>
-          </BrowserRouter>
+          <CartContextProvider>
+            <BrowserRouter>
+              <PaletteModeContextProvider>
+                <ThemeProvider>
+                  <AppRoutes />
+                </ThemeProvider>
+              </PaletteModeContextProvider>
+            </BrowserRouter>
+          </CartContextProvider>
         </AuthContextProvider>
       </LanguageContextProvider>
     </QueryClientProvider>

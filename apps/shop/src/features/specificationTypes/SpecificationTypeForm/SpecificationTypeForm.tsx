@@ -32,7 +32,7 @@ export const SpecificationTypeForm = ({
         <FormFieldArray
           collectionName="subtypes"
           title="Subtypes"
-          editPath={Paths.EDIT_SPECIFICATION_TYPES}
+          editPath={Paths.SpecificationTypes.EDIT_SPECIFICATION_TYPES}
           formFieldNames={[
             { name: "id", hidden: true, isFieldId: true },
             { name: "name", label: "Name" },

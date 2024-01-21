@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSpecificationPattern } from "../../requests/specificationPattern";
+import { getSpecificationPattern } from "../..";
 
 export const useGetSpecificationPattern = (
   id: string,

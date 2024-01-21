@@ -23,7 +23,14 @@ export default function AuthContextProvider({
     token: sessionStorage.getItem(SessionStorage.TOKEN),
     refreshToken: sessionStorage.getItem(SessionStorage.REFRESH_TOKEN),
   });
-  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(() => {
+    const token = sessionStorage.getItem(SessionStorage.TOKEN);
+    if (!token) {
+      return null;
+    }
+
+    return jwtDecode<CurrentUser>(token);
+  });
   const { mutateAsync } = useRefreshToken();
 
   const setSessionToken = (token: string | null) => {
@@ -57,12 +64,40 @@ export default function AuthContextProvider({
     setCurrentUser(null);
   };
 
+  const getFreshSessionTokens = async () => {
+    const token = sessionStorage.getItem(SessionStorage.TOKEN);
+    const refreshToken = sessionStorage.getItem(SessionStorage.REFRESH_TOKEN);
+
+    if (token && refreshToken) {
+      const response = await mutateAsync({
+        refreshToken: refreshToken,
+        token: token,
+      });
+
+      if (response.success) {
+        setTokens(response.token, response.refreshToken);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getFreshSessionTokens();
+  }, []);
+
   const refreshSession = useCallback(async () => {
     if (!authTokens.token || !authTokens.refreshToken) return;
     const decoded = jwtDecode<{ exp: number }>(authTokens.token);
     const tokenExpiration = decoded.exp;
     const expirationWithBuffer = tokenExpiration + 5 * 60;
 
+    const response = await mutateAsync({
+      refreshToken: authTokens.refreshToken,
+      token: authTokens.token,
+    });
+
+    if (response.success) {
+      setTokens(response.token, response.refreshToken);
+    }
     if (expirationWithBuffer < Date.now() / 1000) {
       const response = await mutateAsync({
         refreshToken: authTokens.refreshToken,
@@ -70,10 +105,7 @@ export default function AuthContextProvider({
       });
 
       if (response.success) {
-        setAuthTokens({
-          refreshToken: response.refreshToken,
-          token: response.token,
-        });
+        setTokens(response.token, response.refreshToken);
       }
     }
   }, [authTokens]);
@@ -85,13 +117,6 @@ export default function AuthContextProvider({
 
     return () => clearInterval(interval);
   }, [refreshSession]);
-
-  useEffect(() => {
-    if (!currentUser && authTokens.token) {
-      const decodedUser = jwtDecode<CurrentUser>(authTokens.token);
-      setCurrentUser(decodedUser);
-    }
-  });
 
   const values = {
     setTokens,

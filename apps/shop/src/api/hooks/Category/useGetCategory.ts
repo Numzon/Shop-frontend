@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCategory } from "../../requests/category";
+import { getCategory } from "../..";
 
 export const useGetCategory = (id: string, options?: { enabled: boolean }) =>
   useQuery({

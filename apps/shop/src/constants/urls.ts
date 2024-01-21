@@ -26,3 +26,25 @@ export const PatternUrls = {
   DELETE: "specification-pattern/delete",
   GET_SELECT_LIST: "specification-pattern/select-list",
 };
+
+export const UserUrls = {
+  GET_CURRENT_USER: "user/current-user",
+  PUT_EMAIL: "user/change-email",
+};
+
+export const ProductUrls = {
+  GET: "product",
+  CREATE: "product/create",
+  EDIT: "product/edit",
+  DELETE: "product/delete",
+  SEARCH_BAR: "product/search-bar",
+  PRODUCT_DETAILS: "product/details",
+};
+
+export const CartUrls = {
+  GET: "cart",
+  GET_PRODUCTS_DETAILS: "cart/product-details",
+  ADD_PRODUCT: "cart/add-product",
+  SET_QUANTITY: "cart/set-quantity",
+  REMOVE_PRODUCT: "cart/remove-product",
+};

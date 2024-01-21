@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPatterns } from "../../requests/category";
+import { getPatterns } from "../..";
 
 export const useGetSimplePatterns = () =>
   useQuery({

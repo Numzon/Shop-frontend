@@ -1,12 +1,14 @@
 import { styled } from "@mui/material/styles";
 import { Box, Stack, AppBar, Toolbar, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-// import LanguagePopover from "./LanguagePopover";
-import { APP_BAR_DESKTOP, APP_BAR_MOBILE, NAV_WIDTH } from "../consts";
+import {
+  APP_BAR_DESKTOP,
+  APP_BAR_MOBILE,
+  NAV_WIDTH,
+} from "../../layouts/ManagmentLayout/consts";
 import ThemeModeSwitch from "./ThemeModeSwitch";
-import AccountPopover from "./AccountPopover";
 import UserPanelSwitch from "./UserPanelSwitch";
-// import AccountPopover from "./AccountPopover";
+import AccountIcon from "../AccountIcon";
 
 const StyledRoot = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
@@ -23,7 +25,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   },
 }));
 
-export function Header({ onOpenNav }: { onOpenNav: () => void }) {
+export function ManagmentNavbar({ onOpenNav }: { onOpenNav: () => void }) {
   return (
     <StyledRoot>
       <StyledToolbar>
@@ -49,11 +51,11 @@ export function Header({ onOpenNav }: { onOpenNav: () => void }) {
           {/* <LanguagePopover /> */}
           <UserPanelSwitch />
           <ThemeModeSwitch />
-          <AccountPopover />
+          <AccountIcon />
         </Stack>
       </StyledToolbar>
     </StyledRoot>
   );
 }
 
-export default Header;
+export default ManagmentNavbar;

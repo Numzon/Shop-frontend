@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import Header from "./Header";
+import ManagmentNavbar from "../../components/ManagmentNavbar";
 import Nav from "./Nav";
 import { APP_BAR_DESKTOP, APP_BAR_MOBILE } from "./consts";
+import { useAuth } from "../../auth";
+import { Paths, Roles } from "../../constants";
+import { useRouter } from "../../routes/hooks";
 
 const StyledRoot = styled("div")({
   display: "flex",
@@ -27,10 +30,19 @@ const Main = styled("div")(({ theme }) => ({
 
 export const ManagmentLayout = () => {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!currentUser?.role || currentUser.role !== Roles.ADMIN) {
+      router.push(Paths.NOT_FOUND);
+    }
+  }, [currentUser]);
+
   return (
     <>
       <StyledRoot>
-        <Header onOpenNav={() => setOpen(true)} />
+        <ManagmentNavbar onOpenNav={() => setOpen(true)} />
         <Nav open={open} onClose={() => setOpen(false)} />
         <Main>
           <Outlet />

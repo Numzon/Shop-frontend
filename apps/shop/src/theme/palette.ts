@@ -6,6 +6,9 @@ const lightModePalette: Partial<ThemeOptions["palette"]> = {
   primary: {
     main: purple[400],
   },
+  secondary: {
+    main: "#6a1b9a",
+  },
   background: {
     default: grey[50],
   },
@@ -15,6 +18,15 @@ const darkModePalette: Partial<ThemeOptions["palette"]> = {
   mode: "dark",
   primary: {
     main: purple[400],
+  },
+  // primary: {
+  //   main: "#121212",
+  // },
+  secondary: {
+    main: "#6a1b9a",
+  },
+  background: {
+    default: "#0c0c0c",
   },
 };
 

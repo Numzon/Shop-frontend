@@ -12,17 +12,17 @@ type NavConfig = {
 const navConfig: NavConfig = [
   {
     title: "Categories",
-    path: Paths.CATEGORY,
+    path: Paths.Category.MAIN,
     Icon: CategoryIcon,
   },
   {
     title: "Specification types",
-    path: Paths.SPECIFICATION_TYPES,
+    path: Paths.SpecificationTypes.SPECIFICATION_TYPES,
     Icon: TypeSpecimenIcon,
   },
   {
     title: "Specification patterns",
-    path: Paths.SPECIFICATION_PATTERNS,
+    path: Paths.SpecificationPatterns.MAIN,
     Icon: PatternIcon,
   },
 ];

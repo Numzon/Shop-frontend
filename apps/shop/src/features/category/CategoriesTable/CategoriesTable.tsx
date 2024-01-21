@@ -77,7 +77,7 @@ export const CategoriesTable = () => {
 
   const onEdit = (row: MRT_Row<CategoryListItemDto>) => {
     const id = row.original.id;
-    router.push(Paths.EDIT_CATEGORY.replace(":id", id));
+    router.push(Paths.Category.EDIT_CATEGORY.replace(":id", id));
   };
 
   return (

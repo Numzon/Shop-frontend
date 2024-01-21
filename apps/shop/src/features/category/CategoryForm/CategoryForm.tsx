@@ -51,7 +51,7 @@ export const CategoryForm = ({
         <FormFieldArray
           collectionName="subcategories"
           title="Subcategories"
-          editPath={Paths.EDIT_CATEGORY}
+          editPath={Paths.Category.EDIT_CATEGORY}
           formFieldNames={[
             { name: "id", hidden: true, isFieldId: true },
             { name: "name", label: "Name" },

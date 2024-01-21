@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { CreateSpecificationPatternRequest } from "../../../types";
-import { addSpecificationPattern } from "../../requests/specificationPattern";
+import { addSpecificationPattern } from "../..";
 
 export const useAddSpecificationPattern = () =>
   useMutation({

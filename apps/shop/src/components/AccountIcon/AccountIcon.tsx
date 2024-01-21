@@ -1,18 +1,22 @@
 import { IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import React from "react";
-import { useAuth } from "../../../auth";
+import React, { useState } from "react";
+import { useAuth } from "../../auth";
+import { useTranslation } from "react-i18next";
+import { useRouter } from "../../routes/hooks";
+import { Paths } from "../../constants";
 
-const AccountPopover = () => {
-  const { signOut } = useAuth();
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+const AccountIcon = () => {
+  const { currentUser, signOut } = useAuth();
+  const { t } = useTranslation();
+  const router = useRouter();
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleCloseUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
     setAnchorElUser(null);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -26,10 +30,10 @@ const AccountPopover = () => {
   const accountPopoverSetting: AccountItemProps[] = [
     {
       key: "user-profile",
-      name: "Profile",
+      name: "My account",
       onClick: () => {
-        console.error("to do");
         setAnchorElUser(null);
+        router.push(Paths.UserAccount.MAIN);
       },
     },
     {
@@ -38,6 +42,23 @@ const AccountPopover = () => {
       onClick: () => {
         signOut();
         setAnchorElUser(null);
+      },
+    },
+  ];
+
+  const authenticationItems: AccountItemProps[] = [
+    {
+      key: "sign-in",
+      name: t("Sign In"),
+      onClick: () => {
+        router.push(Paths.Authentication.SIGN_IN);
+      },
+    },
+    {
+      key: "sign-up",
+      name: t("Sign Up"),
+      onClick: () => {
+        router.push(Paths.Authentication.SIGN_UP);
       },
     },
   ];
@@ -63,14 +84,21 @@ const AccountPopover = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {accountPopoverSetting.map((item) => (
-          <MenuItem key={item.key} onClick={item.onClick}>
-            <Typography textAlign="center">{item.name}</Typography>
-          </MenuItem>
-        ))}
+        {currentUser &&
+          accountPopoverSetting.map((item) => (
+            <MenuItem key={item.key} onClick={item.onClick}>
+              <Typography textAlign="center">{item.name}</Typography>
+            </MenuItem>
+          ))}
+        {!currentUser &&
+          authenticationItems.map((item) => (
+            <MenuItem key={item.key} onClick={item.onClick}>
+              <Typography textAlign="center">{item.name}</Typography>
+            </MenuItem>
+          ))}
       </Menu>
     </IconButton>
   );
 };
 
-export default AccountPopover;
+export default AccountIcon;

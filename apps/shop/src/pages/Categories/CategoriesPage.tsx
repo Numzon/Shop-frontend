@@ -9,7 +9,11 @@ export const CategoriesPage = () => {
       <Typography variant="h4" sx={{ mt: 3, mb: 5 }}>
         Users
       </Typography>
-      <LinkButton variant="contained" to={Paths.NEW_CATEGORY} sx={{ mb: 2 }}>
+      <LinkButton
+        variant="contained"
+        to={Paths.Category.NEW_CATEGORY}
+        sx={{ mb: 2 }}
+      >
         Add
       </LinkButton>
       <CategoriesTable />

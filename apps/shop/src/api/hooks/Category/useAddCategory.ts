@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { CreateCategoryRequest } from "../../../types";
-import { addCategory } from "../../requests/category";
+import { addCategory } from "../..";
 
 export const useAddCategory = () =>
   useMutation({

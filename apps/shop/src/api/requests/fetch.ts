@@ -1,5 +1,7 @@
 import axios from "axios";
 import { SessionStorage } from "../../constants/sessionStorage";
+import { useRouter } from "../../routes/hooks";
+import { Paths } from "../../constants";
 
 declare global {}
 
@@ -26,8 +28,10 @@ fetch.interceptors.request.use(async (config) => {
 });
 
 fetch.interceptors.response.use(undefined, (error) => {
+  const router = useRouter();
+
   if (error.response?.status === 401) {
-    window.location.pathname = "/signin";
+    router.push(Paths.SIGN_IN);
   } else {
     throw error;
   }

@@ -75,7 +75,9 @@ export const SpecificationPatternTable = () => {
 
   const onEdit = (row: MRT_Row<SpecificationPatternListItemDto>) => {
     const id = row.original.id;
-    router.push(Paths.EDIT_SPECIFICATION_PATTERNS.replace(":id", id));
+    router.push(
+      Paths.SpecificationPatterns.EDIT_SPECIFICATION_PATTERNS.replace(":id", id)
+    );
   };
 
   return (

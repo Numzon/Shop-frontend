@@ -81,7 +81,9 @@ export const SpecificationTypesTable = () => {
 
   const onEdit = (row: MRT_Row<SpecificationTypeListDto>) => {
     const id = row.original.id;
-    router.push(Paths.EDIT_SPECIFICATION_TYPES.replace(":id", id));
+    router.push(
+      Paths.SpecificationTypes.EDIT_SPECIFICATION_TYPES.replace(":id", id)
+    );
   };
 
   return (

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { EditSpecificationPatternRequest } from "../../../types";
-import { editSpecificationPattern } from "../../requests/specificationPattern";
+import { editSpecificationPattern } from "../..";
 
 export const useEditSpecificationPattern = () =>
   useMutation({

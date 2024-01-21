@@ -19,6 +19,7 @@ export type SignUpRequest = {
 export type CurrentUser = {
   id: string;
   email: string;
+  role: string;
 };
 
 export type RefreshTokenRequest = {

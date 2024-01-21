@@ -10,7 +10,7 @@ export const SpecificationPatternsPage = () => {
         Specification Patterns
       </Typography>
       <LinkButton
-        to={Paths.NEW_SPECIFICATION_PATTERNS}
+        to={Paths.SpecificationPatterns.NEW_SPECIFICATION_PATTERNS}
         variant="contained"
         sx={{ mb: 2 }}
       >

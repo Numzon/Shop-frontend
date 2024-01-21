@@ -7,95 +7,34 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useAuth } from "../../auth";
 import { useRouter } from "../../routes/hooks/useRouter";
-import { Paths } from "../../constants";
-import { useTranslation } from "react-i18next";
+import { Paths, Roles } from "../../constants";
+import AccountIcon from "../AccountIcon";
+import NavSearchBar from "../SearchBar/NavSearchBar";
+import CartIcon from "../CartIcon";
 
 const pages = ["Products", "Pricing", "Blog"];
 
 export const Navbar = () => {
-  const { currentUser, signOut } = useAuth();
-  const { t } = useTranslation();
+  const { currentUser } = useAuth();
   const router = useRouter();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  const handleCloseUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    setAnchorElUser(null);
-  };
-
-  // export const accountPopoverSetting = [
-  //   "Profile",
-  //   "Account",
-  //   "Dashboard",
-  //   "Logout",
-  // ];
-  type AccountItemProps = {
-    key: string;
-    name: string;
-    onClick: () => void;
-  };
-
-  const accountPopoverSetting: AccountItemProps[] = [
-    {
-      key: "user-profile",
-      name: "Profile",
-      onClick: () => {
-        console.error("to do");
-        setAnchorElUser(null);
-      },
-    },
-    {
-      key: "sign-out",
-      name: "Sign out",
-      onClick: () => {
-        signOut();
-        setAnchorElUser(null);
-      },
-    },
-  ];
-
-  const authenticationItems: AccountItemProps[] = [
-    {
-      key: "sign-in",
-      name: t("SignIn"),
-      onClick: () => {
-        router.push(Paths.SIGN_IN);
-      },
-    },
-    {
-      key: "sign-up",
-      name: t("SignUp"),
-      onClick: () => {
-        handleCloseNavMenu();
-        router.push(Paths.SIGN_UP);
-      },
-    },
-  ];
 
   return (
     <AppBar position="static">
@@ -103,11 +42,11 @@ export const Navbar = () => {
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
+            onClick={() => router.push(Paths.HOME)}
             data-testid="custom-element"
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -116,6 +55,7 @@ export const Navbar = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             LOGO
@@ -158,6 +98,7 @@ export const Navbar = () => {
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -176,7 +117,7 @@ export const Navbar = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -187,54 +128,21 @@ export const Navbar = () => {
               </Button>
             ))}
           </Box>
-          {currentUser && (
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <NavSearchBar />
+          </Box>
+
+          {currentUser && currentUser.role === Roles.ADMIN && (
             <IconButton
               sx={{ ml: 1 }}
               color="inherit"
-              onClick={() => router.push(Paths.MANAGMENT_CENTER)}
+              onClick={() => router.push(Paths.ManagmentCenter.MAIN)}
             >
               <DesignServicesIcon />
             </IconButton>
           )}
-
-          <IconButton
-            sx={{ ml: 1 }}
-            onClick={handleOpenUserMenu}
-            color="inherit"
-          >
-            <Tooltip title="Open settings">
-              <AccountCircleIcon />
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {currentUser &&
-                accountPopoverSetting.map((item) => (
-                  <MenuItem key={item.key} onClick={item.onClick}>
-                    <Typography textAlign="center">{item.name}</Typography>
-                  </MenuItem>
-                ))}
-              {!currentUser &&
-                authenticationItems.map((item) => (
-                  <MenuItem key={item.key} onClick={item.onClick}>
-                    <Typography textAlign="center">{item.name}</Typography>
-                  </MenuItem>
-                ))}
-            </Menu>
-          </IconButton>
+          <CartIcon />
+          <AccountIcon />
         </Toolbar>
       </Container>
     </AppBar>

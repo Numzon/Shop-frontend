@@ -15,54 +15,81 @@ import AddSpecificationPatternPage from "../pages/AddSpecificationPattern";
 import EditSpecificationPatternPage from "../pages/EditSpecificationPattern";
 import Authorized from "../components/Authorized";
 import Unauthorized from "../components/Unauthorized";
+import UserAccountLayout from "../layouts/UserAccountLayout";
+import AccountSettingsPage from "../pages/AccountSettings/AccountSettingsPage";
+import ProductDetailsPage from "../pages/ProductDetails/ProductDetailsPage";
+import CartDetailsPage from "../pages/CartDetails/CartDetailsPage";
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path={Paths.AUTHENTICATION} element={<Unauthorized />}>
-        <Route path={Paths.AUTHENTICATION}>
-          <Route path={Paths.SIGN_IN} element={<SignInPage />}></Route>
-          <Route path={Paths.SIGN_UP} element={<SignUpPage />}></Route>
+      <Route path={Paths.Authentication.MAIN} element={<Unauthorized />}>
+        <Route path={Paths.Authentication.MAIN}>
+          <Route
+            path={Paths.Authentication.SIGN_IN}
+            element={<SignInPage />}
+          ></Route>
+          <Route
+            path={Paths.Authentication.SIGN_UP}
+            element={<SignUpPage />}
+          ></Route>
         </Route>
       </Route>
 
       <Route path={Paths.ROOT} element={<NavigationLayout />}>
         <Route path={Paths.HOME}></Route>
+        <Route
+          path={Paths.Product.PRODUCT_DETAILS}
+          element={<ProductDetailsPage />}
+        ></Route>
+        <Route
+          path={Paths.Cart.CART_DETAILS}
+          element={<CartDetailsPage />}
+        ></Route>
+        <Route path={Paths.UserAccount.MAIN} element={<UserAccountLayout />}>
+          <Route
+            path={Paths.UserAccount.ACCOUNT_SETTINGS}
+            element={<AccountSettingsPage />}
+          ></Route>
+        </Route>
       </Route>
 
-      <Route path={Paths.MANAGMENT_CENTER} element={<Authorized />}>
-        <Route path={Paths.MANAGMENT_CENTER} element={<ManagmentLayout />}>
-          <Route path={Paths.CATEGORY} element={<CategoriesPage />}></Route>
+      <Route path={Paths.ManagmentCenter.MAIN} element={<Authorized />}>
+        <Route path={Paths.ManagmentCenter.MAIN} element={<ManagmentLayout />}>
           <Route
-            path={Paths.NEW_CATEGORY}
+            path={Paths.Category.MAIN}
+            element={<CategoriesPage />}
+          ></Route>
+          <Route
+            path={Paths.Category.NEW_CATEGORY}
             element={<AddCategoryPage />}
           ></Route>
           <Route
-            path={Paths.EDIT_CATEGORY}
+            path={Paths.Category.EDIT_CATEGORY}
             element={<EditCategoryPage />}
           ></Route>
           <Route
-            path={Paths.SPECIFICATION_TYPES}
+            path={Paths.SpecificationTypes.SPECIFICATION_TYPES}
             element={<SpecificationTypePage />}
           ></Route>
           <Route
-            path={Paths.NEW_SPECIFICATION_TYPES}
+            path={Paths.SpecificationTypes.NEW_SPECIFICATION_TYPES}
             element={<AddSpecificationTypePage />}
           ></Route>
           <Route
-            path={Paths.EDIT_SPECIFICATION_TYPES}
+            path={Paths.SpecificationTypes.EDIT_SPECIFICATION_TYPES}
             element={<EditSpecificationTypePage />}
           ></Route>
           <Route
-            path={Paths.SPECIFICATION_PATTERNS}
+            path={Paths.SpecificationPatterns.MAIN}
             element={<SpecificationPatternsPage />}
           ></Route>
           <Route
-            path={Paths.NEW_SPECIFICATION_PATTERNS}
+            path={Paths.SpecificationPatterns.NEW_SPECIFICATION_PATTERNS}
             element={<AddSpecificationPatternPage />}
           ></Route>
           <Route
-            path={Paths.EDIT_SPECIFICATION_PATTERNS}
+            path={Paths.SpecificationPatterns.EDIT_SPECIFICATION_PATTERNS}
             element={<EditSpecificationPatternPage />}
           ></Route>
         </Route>

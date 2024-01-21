@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSpecificationType } from "../../requests/specificationType";
+import { getSpecificationType } from "../..";
 
 export const useGetSpecificationType = (
   id: string,

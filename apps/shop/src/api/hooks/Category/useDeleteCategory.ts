@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { DeleteCategoryRequest } from "../../../types";
-import { deleteCategory } from "../../requests/category";
+import { deleteCategory } from "../..";
 
 export const useDeleteCategory = () =>
   useMutation({

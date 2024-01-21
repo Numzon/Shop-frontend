@@ -49,7 +49,6 @@ export const EditSpecificationPatternView = () => {
   const onSubmit: SubmitHandler<SpecificationPatternFormValues> = async (
     values
   ) => {
-    console.log(values);
     await mutateAsync(
       mapSpecificationPatternFormValuesToEditSpecificationPatternRequest(
         values

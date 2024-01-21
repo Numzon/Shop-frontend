@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { DeleteSpecificationTypeRequest } from "../../../types";
-import { deleteSpecificationType } from "../../requests/specificationType";
+import { deleteSpecificationType } from "../..";
 
 export const useDeleteSpecificationType = () =>
   useMutation({
